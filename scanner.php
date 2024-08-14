@@ -85,13 +85,13 @@ class Scanner
 			}
 		case '>':
 			$this -> addToken(new Token(TokenType::GREATER, $token, null, $this -> line)); break;
-		case '\n':
-			echo "new line found\n";
+		case "\n":
+			$this -> addToken(new Token(TokenType::EOL, $token, null, $this -> line)); break;
 			break;
-		case '\t':
-			echo "tab found\n";
+		case "\t":
+			$this -> addToken(new Token(TokenType::TAB, $token, null, $this -> line)); break;
 			break;
-		case '\r':
+		case "\r":
 			echo "carriage found\n";
 			break;
 

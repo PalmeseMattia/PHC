@@ -13,6 +13,9 @@
 		echo $token -> toString();
 	}
 	foreach ($scanner -> tokens as $token) {
-		echo $token -> lexem . " ";
+		echo $token -> lexem;
+		if ($token -> type != TokenType::EOL and $token -> type != TokenType::EOF) {
+			echo ' ';
+		}
 	}
 ?>

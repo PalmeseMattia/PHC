@@ -5,7 +5,6 @@ enum TokenType
 	case RIGHT_PAREN;
 	case LEFT_BRACE;
 	case RIGHT_BRACE;
-	case LEFT;
 	case COMMA;
 	case DOT;
 	case MINUS;
@@ -23,25 +22,25 @@ enum TokenType
 	case LESS;
 	case LESS_EQUAL;
 	// Literals.
-	case IDENTIFIER;
 	case STRING;
 	case NUMBER;
+	//Types
+	case INT;
+	case FLOAT;
+	case DOUBLE;
+	case CHAR;
 	// Keywords.
-	case AND;
-	case ELSE;
-	case FUN;
 	case FOR;
 	case IF;
 	case NULL;
-	case OR;
-	case PRINT;
 	case RETURN;
-	case VAR;
 	case WHILE;
+	// Special characters
 	case EOF;
 	case EOL;
 	case TAB;
 	case PRE;
+	case CARRY;
 }
 
 class Token
