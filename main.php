@@ -7,8 +7,9 @@
 		exit(420);
 	}
 	$file_name = $argv[1];
-	$handle = fopen($file_name, "rb") or die("Unable to locate the file!\n");
-	$source = fread($handle, filesize($file_name));
-	$scanner = new Scanner($source);
+	$scanner = new Scanner($file_name);
 	$scanner -> scan();
+	foreach ($scanner -> tokens as $token) {
+		echo $token -> toString();
+	}
 ?>

@@ -5,6 +5,7 @@ enum TokenType
 	case RIGHT_PAREN;
 	case LEFT_BRACE;
 	case RIGHT_BRACE;
+	case LEFT;
 	case COMMA;
 	case DOT;
 	case MINUS;
@@ -38,6 +39,9 @@ enum TokenType
 	case VAR;
 	case WHILE;
 	case EOF;
+	case EOL;
+	case TAB;
+	case PRE;
 }
 
 class Token
