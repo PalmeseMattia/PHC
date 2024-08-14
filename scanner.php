@@ -27,7 +27,7 @@ class Scanner
 
 	private function peek() {
 		$char = fgetc($this -> handle);
-		fseek($this -> handle, -1, SEEK_CURR);
+		fseek($this -> handle, -1, SEEK_CUR);
 		return $char;
 	}
 
@@ -69,25 +69,30 @@ class Scanner
 		// We should add support to Less Equal, Greater Equal ecc....
 		// If the last token is a preprocess directive, we should take the name of the lib included
 		case '<':
-
-			$this -> addToken(new Token(TokenType::LESS, $token, null, $this -> line)); break;
+			// If i have a < bracket and the last token is a preprocessor directive
+			// we take the name of the library as a string
+			if ($this -> tokens[$this -> tok_count - 1] -> type == TokenType::PRE) {
+				$regex = '/<[A-Za-z]+\\.[A-Za-z]>/i';
+				$char = $this -> advance();
+				$lib = $token . $char;
+				while(!preg_match($regex, $lib)) {
+					$lib= $lib . $this -> advance();
+				}
+				$this -> addToken(new Token(TokenType::STRING, $lib, null, $this -> line));
+				break;
+			} else {
+				$this -> addToken(new Token(TokenType::LESS, $token, null, $this -> line)); break;
+			}
 		case '>':
 			$this -> addToken(new Token(TokenType::GREATER, $token, null, $this -> line)); break;
-		case '\\':
-			$char = $this -> advance();
-			switch($char) {
-			case 'n':
-				$this -> addToken(new Token(TokenType::EOL, "\\n", null, $this -> line));
-				$this -> line += 1; break;
-			case 't':
-				$this -> addToken(new Token(TokenType::TAB, "\\t", null, $this -> line));
-				$this -> line += 1; break;
-			case 'r':
-				$this -> addToken(new Token(TokenType::TAB, "\\r", null, $this -> line));
-				$this -> line += 1; break;
-			default:
-				break;
-			}
+		case '\n':
+			echo "new line found\n";
+			break;
+		case '\t':
+			echo "tab found\n";
+			break;
+		case '\r':
+			echo "carriage found\n";
 			break;
 
 		// String Literals
@@ -103,8 +108,33 @@ class Scanner
 			break;
 		case ' ':
 			break;
-		default: 
-			echo("Unexpected character " . $token . "  at line: " . $this -> line . "!\n");
+		default:
+			// Literal numbers
+			if (is_numeric($token)) {
+				$num = $token;
+				$next = $this -> peek();
+				while(is_numeric($next) or $next == '.') {
+					$num = $num . $next;
+					$this -> advance();
+					$next = $this -> peek();
+				}
+				$this -> addToken(new Token(TokenType::NUMBER, $num, null, $this -> line));
+			// Reserved keyword or variables/macros
+			} else if (preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $token)) {
+				$regex = '/^[a-zA-Z_][a-zA-Z0-9_]*$/';
+				$word = $token;
+				$next = $this -> peek();
+				while(preg_match($regex, $word . $next)) {
+					$word .= $next;
+					$this -> advance();
+					$next = $this -> peek();
+				}
+				// TODO: implement control over keywords
+				$this -> addToken(new Token(TokenType::STRING, $word, null, $this -> line));
+				echo "Added word " . $word . "\n";
+			} else {
+				echo("Unexpected character " . $token . "  at line: " . $this -> line . "!\n");
+			}
 		}
 	}
 

@@ -12,4 +12,7 @@
 	foreach ($scanner -> tokens as $token) {
 		echo $token -> toString();
 	}
+	foreach ($scanner -> tokens as $token) {
+		echo $token -> lexem . " ";
+	}
 ?>
