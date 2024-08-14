@@ -2,11 +2,12 @@
 require_once "token.php";
 
 $Colors = array(
-	TokenType::FUNCTION -> name => "C0BDA5",
-	TokenType::STRING -> name => "DBFE87",
-	TokenType::PRE -> name => "03B5AA",
-	TokenType::NUMBER -> name => "FF3864",
-	TokenType::RETURN -> name => "DFB2F4"
+	TokenType::FUNCTION -> name => "FF5C67",
+	TokenType::STRING -> name => "FFEF3F",
+	TokenType::PRE -> name => "55D6C2",
+	TokenType::NUMBER -> name => "3FFF89",
+	TokenType::RETURN -> name => "DFB2F4",
+	TokenType::INT -> name => "52A9FF"
 );
 
 function getColor(TokenType $type)

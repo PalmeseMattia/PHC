@@ -30,7 +30,9 @@
 			</tr>
 			<?php
 			foreach ($scanner -> tokens as $token) {
-				echo '<tr><th>' . $token -> type -> name . '</th><th>'. $token -> toString() . '</th></tr>';
+				echo '<tr><th>' . $token -> type -> name 
+					. '</th><th>LINE: '. $token -> line  
+					. ' LEXEM: ' . $token -> lexem . '</th></tr>';
 			}
 			?>
 		</table>
