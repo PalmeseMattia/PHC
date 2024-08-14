@@ -61,7 +61,6 @@ class Scanner
 			$regex = '/^#[a-zA-Z]+$/';
 			$directive = $directive . $this -> advance();
 			while(preg_match($regex, $directive)) {
-				echo $directive;
 				$directive = $directive . $this -> advance();
 			}
 			$this -> addToken(new Token(TokenType::PRE, $directive, null, $this -> line));

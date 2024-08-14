@@ -1,5 +1,4 @@
 #include <unistd.h>
-#define STUFF 10
 
 int main()
 {
