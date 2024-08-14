@@ -87,6 +87,7 @@ class Scanner
 			$this -> addToken(new Token(TokenType::GREATER, $token, null, $this -> line)); break;
 		case "\n":
 			$this -> addToken(new Token(TokenType::EOL, $token, null, $this -> line)); break;
+			$this -> line += 1;
 			break;
 		case "\t":
 			$this -> addToken(new Token(TokenType::TAB, $token, null, $this -> line)); break;
@@ -131,7 +132,6 @@ class Scanner
 				}
 				// TODO: implement control over keywords
 				$this -> addToken(new Token(TokenType::STRING, $word, null, $this -> line));
-				echo "Added word " . $word . "\n";
 			} else {
 				echo("Unexpected character " . $token . "  at line: " . $this -> line . "!\n");
 			}

@@ -1,0 +1,55 @@
+body {
+	background-color : #282828;
+	font-family: 'Courier New', monospace;
+}
+
+.container {
+	display : flex;
+	flex: row;
+	height : 80%;
+	padding : 10;
+}
+
+.bible {
+	color : white;
+	will-change : transform;
+	width : 50%;
+	height : 100%;
+	overflow-y:scroll;
+	border: 2px solid white;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.center-title {
+	width : 50%;
+	text-align: center;
+	color : white;
+}
+
+table {
+	will-change : transform;
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 50%;
+	overflow-y:scroll;
+	height: 100%;
+	display:block;
+}
+
+td, th {
+	width : 100%;
+	border: 2px solid black;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: white;
+}
+tr:nth-child(odd) {
+	background-color: #A0A0A0;
+}

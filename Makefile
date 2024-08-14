@@ -1,4 +1,4 @@
-OUT = out.lex
+OUT = index.html
 SOURCE = example/main.c
 
 all : main.php
