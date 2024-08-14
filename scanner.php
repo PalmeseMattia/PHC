@@ -32,6 +32,7 @@ class Scanner
 	}
 
 	private function scanToken(string $token) {
+		global $Keywords;
 		switch($token) {
 		// One character Simple stuff
 		case '(':
@@ -130,8 +131,12 @@ class Scanner
 					$this -> advance();
 					$next = $this -> peek();
 				}
-				// TODO: implement control over keywords
-				$this -> addToken(new Token(TokenType::STRING, $word, null, $this -> line));
+				// Control if the word is a C keyword
+				if (array_key_exists($word, $Keywords)) {
+					$this -> addToken(new Token($Keywords[$word], $word, null, $this -> line));
+				} else {
+					$this -> addToken(new Token(TokenType::STRING, $word, null, $this -> line));
+				}
 			} else {
 				echo("Unexpected character " . $token . "  at Line: " . $this -> line 
 					. " Character:" . $this -> curr . "!\n");

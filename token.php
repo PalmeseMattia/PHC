@@ -35,6 +35,7 @@ enum TokenType
 	case NULL;
 	case RETURN;
 	case WHILE;
+	case FUNCTION;
 	// Special characters
 	case EOF;
 	case EOL;
@@ -42,6 +43,12 @@ enum TokenType
 	case PRE;
 	case CARRY;
 }
+
+$Keywords = array(
+	"return" => TokenType::RETURN,
+	"int" => TokenType::INT,
+	"main" => TokenType::FUNCTION
+);
 
 class Token
 {

@@ -4,9 +4,14 @@
 		<title>PHC</title>
 	</head>
 	<body>
+		<div class="center-title center">
+			<h2>C LEXER AND SYNTAX HIGHLIGHT</h2>
+			<h2>Made with PHP 8 with love <3 </h2>
+		</div>
 		<?php
 			require_once "token.php";
 			require_once "scanner.php";
+			require_once "colors.php";
 		
 			if ($argc < 2) {
 				echo "Please provide a C source file\n";
@@ -39,7 +44,9 @@
 			} else if ($token -> type == TokenType::TAB) {
 				echo '&emsp;&emsp;&emsp;&emsp;';
 			} else {
-				echo '<span>' . $token -> lexem . '</span> ';
+				echo '<span style="color:' .
+				       getColor($token -> type)	
+					. '">' . $token -> lexem . '</span> ';
 			}
 		}
 		?>
